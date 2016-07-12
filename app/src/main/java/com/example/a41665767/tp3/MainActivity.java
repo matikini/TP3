@@ -4,6 +4,8 @@ package com.example.a41665767.tp3;
  * Created by 41665767 on 11/5/2016.
  */
 
+    import android.database.Cursor;
+    import android.database.sqlite.SQLiteDatabase;
     import android.os.Bundle;
     import android.support.design.widget.NavigationView;
     import android.support.v4.app.FragmentManager;
@@ -16,13 +18,20 @@ package com.example.a41665767.tp3;
     import android.util.Log;
     import android.view.MenuItem;
     import android.widget.TextView;
+    import android.widget.Toast;
 
-        public class MainActivity extends AppCompatActivity  {
+    import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity  {
 
         private DrawerLayout drawerLayout;
         private FragmentTabHost tabHost;
         private String userName="";
         private TextView navUserName;
+        public ArrayList<Jugada> listajug;
+        Base accesobase;
+        SQLiteDatabase basedatos;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +41,52 @@ package com.example.a41665767.tp3;
             drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             inicializarToolbar(); // Setear Toolbar como action bar
             inicializarTabs(); // Crear los tabs
+            listajug = new ArrayList<>();
+            if (!abrirbase()){
+                Toast toast = Toast.makeText(this, "Error accediendo a la base", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            Cursor conjuntoDeRegistros;
+            conjuntoDeRegistros=basedatos.rawQuery("select nombre, secuencia, cantmov from jugadas", null);
+            if(conjuntoDeRegistros.moveToFirst()== true){
+                int cantidadRegistros=0;
+                do{
+                    cantidadRegistros++;
+                    Jugada j = new Jugada(conjuntoDeRegistros.getString(0),conjuntoDeRegistros.getString(1),conjuntoDeRegistros.getInt(2));
+                    listajug.add(j);
+                } while (conjuntoDeRegistros.moveToNext() == true);
+            }
 
         }
+        boolean abrirbase()
+        {
+            Boolean responder;
+            accesobase=new Base(this, "baseTP3", null,1);
+            basedatos=accesobase.getWritableDatabase();
+            if(basedatos != null)
+            {
+                responder =true;
+            }
+            else
+            {
+                responder =false;
+            }
+            return responder;
+        }
 
-
+    public void setColor(int color){
+        switch (color){
+            case 0:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Rojo));
+                break;
+            case 1:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Azul));
+                break;
+            case 2:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Verde));
+                break;
+        }
+    }
 
         private void inicializarToolbar() {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,19 +120,17 @@ package com.example.a41665767.tp3;
                 public boolean onNavigationItemSelected(MenuItem item) {
                     item.setChecked(true);
                     switch(item.getItemId()) {
-                        case R.id.nav_camera:
-                            Log.d("Choose:","Camera");
-                            tabHost.setCurrentTab(0);
-                            break;
-                        case R.id.nav_gallery:
-                            Log.d("Choose:","Gallery");
-                            tabHost.setCurrentTab(1);
+                        case R.id.nav_view:
+                            Log.d("Choose:","Background");
+                            FragmentManager fm = getSupportFragmentManager();
+                            ColoresDialog coloresDialog = new ColoresDialog();
+                            coloresDialog.show(fm, "fragment_colores");
                             break;
                         case R.id.nav_user:
                             Log.d("Choose:","Send");
-                            FragmentManager fm = getSupportFragmentManager();
+                            FragmentManager frm = getSupportFragmentManager();
                             UserNameDialog userNameDialog = new UserNameDialog();
-                            userNameDialog.show(fm, "fragment_edit_name");
+                            userNameDialog.show(frm, "fragment_edit_name");
                             break;
                     }
 
@@ -113,6 +162,10 @@ package com.example.a41665767.tp3;
             return userName;
 
         }
+            public ArrayList<Jugada> getJugadas(){
+                return listajug;
+            }
+        public SQLiteDatabase getBasedatos() {return basedatos;}
 
     }
 

@@ -14,19 +14,19 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Btn1"
                 />
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Btn2"
                 />
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -40,19 +40,19 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Btn4"
                 />
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Btn5"
                 />
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -66,19 +66,19 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Btn7"
                 />
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/Btn8"
                 />
-            <ImageButton
+            <com.example.a41665767.tp3.GameButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

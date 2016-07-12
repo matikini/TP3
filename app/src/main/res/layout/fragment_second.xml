@@ -4,18 +4,10 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Second fragment" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="left|top" />
+    <ListView
+    android:id="@+id/listVw"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+</ListView>
 
 </FrameLayout>
